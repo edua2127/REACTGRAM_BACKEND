@@ -15,7 +15,7 @@ const insertPhoto = async (req, res) => {
     image,
     title,
     userId: user._id,
-    userName: user.name
+    username: user.name
   });
 
   //if photo is created successfully, return data
@@ -76,8 +76,10 @@ const getUserPhotos = async (req, res) => {
 }
 
 //Get photos by id
+// Get photo by id
 const getPhotoById = async (req, res) => {
   const { id } = req.params;
+
   const photo = await Photo.findById(mongoose.Types.ObjectId(id));
 
   // Check if photo exists
@@ -86,8 +88,8 @@ const getPhotoById = async (req, res) => {
     return;
   }
 
-  return res.status(200).json(photo);
-}
+  res.status(200).json(photo);
+};
 
 // Update a photo
 const updatePhoto = async (req, res) => {
@@ -179,8 +181,8 @@ const commentPhoto = async (req, res) => {
   // Put comment in array of comments
   const userComment = {
     comment,
-    userName: user.name,
-    userIamge: user.image,
+    username: user.name,
+    userImage: user.profileImage,
     userId: user._id,
   };
 
